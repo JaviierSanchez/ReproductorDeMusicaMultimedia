@@ -9,17 +9,17 @@
 
     <ImageView
         android:id="@+id/btnPause"
-        android:layout_width="72dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginEnd="40dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="10dp"
         android:contentDescription="@string/todo"
         android:onClick="pause"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnStop"
         app:layout_constraintStart_toEndOf="@+id/btnPlay"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576"
+        app:layout_constraintVertical_bias="0.563"
         app:srcCompat="@drawable/tablerplayerpausefilled"
         tools:ignore="MissingConstraints" />
 
@@ -37,32 +37,30 @@
 
     <ImageView
         android:id="@+id/btnStop"
-        android:layout_width="73dp"
-        android:layout_height="71dp"
-        android:layout_marginEnd="44dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
         android:onClick="stop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.754"
+        app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
         app:layout_constraintStart_toEndOf="@+id/btnPause"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574"
+        app:layout_constraintVertical_bias="0.563"
         app:srcCompat="@drawable/materialsymbolsstopcircle"
         tools:ignore="ContentDescription,MissingConstraints" />
 
     <ImageView
         android:id="@+id/btnPlay"
-        android:layout_width="69dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="56dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="23dp"
         android:contentDescription="TODO"
         android:onClick="play"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPause"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574"
+        app:layout_constraintVertical_bias="0.563"
         app:srcCompat="@drawable/solarplaybold"
         tools:ignore="ContentDescription,HardcodedText,MissingConstraints" />
 
@@ -89,5 +87,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlay"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.563"
+        app:srcCompat="@drawable/oimediaskipbackward" />
+
+    <ImageView
+        android:id="@+id/btnSiguiente"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="384dp"
+        android:layout_marginEnd="28dp"
+        android:onClick="siguienteCancion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/oimediaskipforward" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

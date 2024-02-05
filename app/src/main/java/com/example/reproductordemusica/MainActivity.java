@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
 
     TextView duracion;
 
+
+    private int[] canciones = {R.raw.musica,R.raw.musica2,R.raw.musica3};
+    private int indiceCancionActual = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +78,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     public void play(View view) {
         if (mp == null) {
-            mp = MediaPlayer.create(this, R.raw.musica2);
+            mp = MediaPlayer.create(this, canciones[indiceCancionActual]);
             if (mp != null) {
                 mp.start();
                 Toast.makeText(this, "Reproduciendo", Toast.LENGTH_SHORT).show();
@@ -90,6 +95,23 @@ public class MainActivity extends AppCompatActivity {
             mp.start();
             Toast.makeText(this, "Reanudando", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void cambiarCancion() {
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+            selector.setProgress(0);
+            bucle.setChecked(false);
+
+            // Cambia al siguiente índice de canción
+            indiceCancionActual = (indiceCancionActual + 1) % canciones.length;
+        }
+    }
+    public void siguienteCancion(View view) {
+        cambiarCancion();
+        play(view);
     }
 
 
