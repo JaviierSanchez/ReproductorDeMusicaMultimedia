@@ -19,9 +19,36 @@
         app:layout_constraintEnd_toStartOf="@+id/btnStop"
         app:layout_constraintStart_toEndOf="@+id/btnPlay"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.865"
+        app:layout_constraintVertical_bias="0.576"
         app:srcCompat="@drawable/tablerplayerpausefilled"
         tools:ignore="MissingConstraints" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="292dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/white"
+        android:progressTint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnStop"
+        android:layout_width="73dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="44dp"
+        android:onClick="stop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.754"
+        app:layout_constraintStart_toEndOf="@+id/btnPause"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.574"
+        app:srcCompat="@drawable/materialsymbolsstopcircle"
+        tools:ignore="ContentDescription,MissingConstraints" />
 
     <ImageView
         android:id="@+id/btnPlay"
@@ -35,22 +62,32 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.862"
+        app:layout_constraintVertical_bias="0.574"
         app:srcCompat="@drawable/solarplaybold"
         tools:ignore="ContentDescription,HardcodedText,MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/btnStop"
-        android:layout_width="73dp"
-        android:layout_height="71dp"
-        android:layout_marginEnd="44dp"
-        android:onClick="stop"
+    <CheckBox
+        android:id="@+id/checkBoxBucle"
+        android:layout_width="110dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/black"
+        android:onClick="bucleCancion"
+        android:text="@string/bucle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlay" />
+
+    <TextView
+        android:id="@+id/tvTiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:onClick="obtenerDuracionFormateada"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.754"
-        app:layout_constraintStart_toEndOf="@+id/btnPause"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.865"
-        app:srcCompat="@drawable/materialsymbolsstopcircle"
-        tools:ignore="ContentDescription,MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
