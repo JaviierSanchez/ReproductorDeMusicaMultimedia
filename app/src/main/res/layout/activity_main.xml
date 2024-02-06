@@ -5,18 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:onClick="anteriorCancion"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/btnPause"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="35dp"
         android:contentDescription="@string/todo"
         android:onClick="pause"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnStop"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnPlay"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.563"
@@ -27,7 +28,7 @@
         android:id="@+id/seekBar"
         android:layout_width="292dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="76dp"
         android:background="@color/white"
         android:progressTint="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,14 +38,12 @@
 
     <ImageView
         android:id="@+id/btnStop"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="60dp"
         android:onClick="stop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
-        app:layout_constraintStart_toEndOf="@+id/btnPause"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.563"
         app:srcCompat="@drawable/materialsymbolsstopcircle"
@@ -52,28 +51,28 @@
 
     <ImageView
         android:id="@+id/btnPlay"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="23dp"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="64dp"
         android:contentDescription="TODO"
         android:onClick="play"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.563"
         app:srcCompat="@drawable/solarplaybold"
-        tools:ignore="ContentDescription,HardcodedText,MissingConstraints" />
+        tools:ignore="ContentDescription,HardcodedText,MissingConstraints,DuplicateSpeakableTextCheck" />
 
     <CheckBox
         android:id="@+id/checkBoxBucle"
         android:layout_width="110dp"
         android:layout_height="48dp"
-        android:layout_marginTop="60dp"
-        android:textColor="@color/black"
+        android:layout_marginTop="72dp"
         android:onClick="bucleCancion"
         android:text="@string/bucle"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPlay" />
 
@@ -90,27 +89,38 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="20dp"
+        android:onClick="anteriorCancion"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPlay"
-        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.563"
+        app:layout_constraintVertical_bias="0.261"
         app:srcCompat="@drawable/oimediaskipbackward" />
 
     <ImageView
         android:id="@+id/btnSiguiente"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="384dp"
-        android:layout_marginEnd="28dp"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="20dp"
         android:onClick="siguienteCancion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/oimediaskipforward" />
+
+    <TextView
+        android:id="@+id/nombreCancion"
+        android:layout_width="263dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:onClick="asignarNombreCancion"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,5 @@
 package com.example.reproductordemusica;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
@@ -18,11 +19,9 @@ public class MainActivity extends AppCompatActivity {
     Runnable runnable;
     Handler handler;
     CheckBox bucle;
-
+    TextView nombreCancion;
     TextView duracion;
-
-
-    private int[] canciones = {R.raw.musica,R.raw.musica2,R.raw.musica3};
+    private int[] canciones = {R.raw.musica, R.raw.musica2, R.raw.musica3};
     private int indiceCancionActual = 0;
 
     @Override
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         bucle = findViewById(R.id.checkBoxBucle);
         duracion = findViewById(R.id.tvTiempo);
+        nombreCancion = findViewById(R.id.nombreCancion);
         selector = findViewById(R.id.seekBar);
         handler = new Handler();
         selector.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -63,20 +63,20 @@ public class MainActivity extends AppCompatActivity {
         return String.format("%02d:%02d", minutos, segundos);
     }
 
-    public void bucleCancion(View view){
+    public void bucleCancion(View view) {
 
         if (bucle.isChecked()) {
             if (mp != null) {
                 mp.setLooping(true);
+                Toast.makeText(this,"Bucle activado", Toast.LENGTH_SHORT).show();
             }
         } else {
             if (mp != null) {
                 mp.setLooping(false);
+                Toast.makeText(this,"Bucle desactivado", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-
 
 
     public void play(View view) {
@@ -84,7 +84,13 @@ public class MainActivity extends AppCompatActivity {
             mp = MediaPlayer.create(this, canciones[indiceCancionActual]);
             if (mp != null) {
                 mp.start();
-                Toast.makeText(this, "Reproduciendo", Toast.LENGTH_SHORT).show();
+
+                // Obtener el nombre de la canción actual
+                String nombreCancion = obtenerNombreCancion(indiceCancionActual);
+
+                // Asignar el nombre de la canción al TextView
+                asignarNombreCancion(view);
+
                 selector.setMax(mp.getDuration());
                 actualizarSeekBar();
             } else {
@@ -93,8 +99,35 @@ public class MainActivity extends AppCompatActivity {
         } else if (!mp.isPlaying()) {
             mp.seekTo(pause);
             mp.start();
-            Toast.makeText(this, "Reanudando", Toast.LENGTH_SHORT).show();
+
+            // Obtener el nombre de la canción actual
+            String nombreCancion2 = obtenerNombreCancion(indiceCancionActual);
+
+            // Asignar el nombre de la canción al TextView
+            asignarNombreCancion(view);
+
+            // Mostrar el Toast con el nombre de la canción
+            Toast.makeText(this, "Reanudando: " + nombreCancion, Toast.LENGTH_LONG).show();
         }
+    }
+
+
+
+    private void asignarNombreCancion(View view){
+
+        String nombre = obtenerNombreCancion(indiceCancionActual);
+
+        nombreCancion.setText(nombre);
+    }
+
+    private String obtenerNombreCancion(int indice) {
+
+        String[] nombresCanciones = {"Tu no metes cabra", "Artificial Noise", "El ultimo suspiro"};
+
+        // Asegúrate de que el índice esté dentro de los límites del array
+        indice = Math.max(0, Math.min(indice, nombresCanciones.length - 1));
+
+        return nombresCanciones[indice];
     }
 
     private void cambiarCancion() {
@@ -109,12 +142,27 @@ public class MainActivity extends AppCompatActivity {
             indiceCancionActual = (indiceCancionActual + 1) % canciones.length;
         }
     }
+
     public void siguienteCancion(View view) {
         cambiarCancion();
         play(view);
     }
 
+    public void anteriorCancion(View view) {
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+            selector.setProgress(0);
+            bucle.setChecked(false);
 
+            // Cambia al índice de la canción anterior
+            indiceCancionActual = (indiceCancionActual - 1 + canciones.length) % canciones.length;
+
+            // Reproduce la nueva canción
+            play(view);
+        }
+    }
 
 
     public void pause(View view) {
