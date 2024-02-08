@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:onClick="anteriorCancion"
     tools:context=".MainActivity">
 
     <ImageView
@@ -122,5 +121,16 @@
         app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <VideoView
+        android:id="@+id/video"
+        android:layout_width="203dp"
+        android:layout_height="235dp"
+        android:layout_marginStart="12dp"
+        android:onClick="verVideo"
+        app:layout_constraintBottom_toTopOf="@+id/btnPause"
+        app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/nombreCancion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

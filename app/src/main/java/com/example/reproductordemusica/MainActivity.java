@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
     MediaPlayer mp;
@@ -21,8 +21,10 @@ public class MainActivity extends AppCompatActivity {
     CheckBox bucle;
     TextView nombreCancion;
     TextView duracion;
-    private int[] canciones = {R.raw.musica, R.raw.musica2, R.raw.musica3};
+    private int[] canciones = {R.raw.tunometescabra, R.raw.artificialnoise, R.raw.ultimosuspiro,R.raw.violinistaentutejado,R.raw.comocamaron,R.raw.video3};
     private int indiceCancionActual = 0;
+
+    VideoView video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         nombreCancion = findViewById(R.id.nombreCancion);
         selector = findViewById(R.id.seekBar);
         handler = new Handler();
+        video = findViewById(R.id.video);
+
         selector.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -93,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
 
                 selector.setMax(mp.getDuration());
                 actualizarSeekBar();
+                if(nombreCancion.equals("Video")){
+                    verVideo();
+                }else{
+
+                    video.setActivated(false);
+                }
+
+
             } else {
                 Toast.makeText(this, "Error al crear el reproductor", Toast.LENGTH_SHORT).show();
             }
@@ -107,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             asignarNombreCancion(view);
 
             // Mostrar el Toast con el nombre de la canción
-            Toast.makeText(this, "Reanudando: " + nombreCancion, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Reanudando: " + nombreCancion2, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -122,12 +134,27 @@ public class MainActivity extends AppCompatActivity {
 
     private String obtenerNombreCancion(int indice) {
 
-        String[] nombresCanciones = {"Tu no metes cabra", "Artificial Noise", "El ultimo suspiro"};
+        String[] nombresCanciones = {"Tu no metes cabra", "Artificial Noise", "El ultimo suspiro","Un Violinista En Tu Tejado","Como Camaron","Video"};
 
         // Asegúrate de que el índice esté dentro de los límites del array
         indice = Math.max(0, Math.min(indice, nombresCanciones.length - 1));
 
         return nombresCanciones[indice];
+    }
+    private void verVideo() {
+        // Establecer la ruta del video utilizando el recurso raw
+        String path = "android.resource://" + getPackageName() + "/" + R.raw.video3;
+        video.setVideoPath(path);
+
+        // Iniciar la reproducción del video
+        video.start();
+
+        // Configurar un Listener para detectar el final del video
+        video.setOnCompletionListener(mp -> {
+
+            cambiarCancion();
+            play(findViewById(android.R.id.content));
+        });
     }
 
     private void cambiarCancion() {
