@@ -2,6 +2,7 @@ package com.example.reproductordemusica;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     CheckBox bucle;
     TextView nombreCancion;
     TextView duracion;
-    private int[] canciones = {R.raw.tunometescabra, R.raw.artificialnoise, R.raw.ultimosuspiro,R.raw.violinistaentutejado,R.raw.comocamaron,R.raw.video3};
+    private int[] canciones = {R.raw.tunometescabra, R.raw.artificialnoise, R.raw.ultimosuspiro,R.raw.violinistaentutejado,R.raw.comocamaron,R.raw.video5};
     private int indiceCancionActual = 0;
 
     VideoView video;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         duracion = findViewById(R.id.tvTiempo);
         nombreCancion = findViewById(R.id.nombreCancion);
         selector = findViewById(R.id.seekBar);
-        handler = new Handler();
+       handler = new Handler();
         video = findViewById(R.id.video);
 
         selector.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -102,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 }else{
 
                     video.setActivated(false);
+                    video.suspend();
+
                 }
 
 
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void verVideo() {
         // Establecer la ruta del video utilizando el recurso raw
-        String path = "android.resource://" + getPackageName() + "/" + R.raw.video3;
+        String path = "android.resource://" + getPackageName() + "/" + R.raw.video5;
         video.setVideoPath(path);
 
         // Iniciar la reproducción del video
@@ -176,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void anteriorCancion(View view) {
-        if (mp != null) {
+        if (mp != null ) {
             mp.stop();
             mp.release();
             mp = null;
@@ -193,18 +196,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void pause(View view) {
-        if (mp != null && mp.isPlaying()) {
+        if (mp != null && mp.isPlaying() || video.isPlaying()) {
             mp.pause();
+            video.pause();
             pause = mp.getCurrentPosition();
             Toast.makeText(this, "Pausa", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void stop(View view) {
-        if (mp != null && mp.isPlaying()) {
+        if (mp != null && mp.isPlaying() || video.isPlaying()) {
             mp.stop();
             mp.release();
             mp = null;
+            video.suspend();
+            video.stopPlayback();
+
             selector.setProgress(0);
             bucle.setChecked(false); // Desactivar el bucle al detener la reproducción
             Toast.makeText(this, "Stop", Toast.LENGTH_SHORT).show();
